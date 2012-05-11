@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2012 Martin Mitas
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+#include <winresrc.h>
+#include "resource.h"
+#include "compat.h"
+
+
+/* Manifest enabling XP theme on Win XP */
+1 RT_MANIFEST res/manifest.xml
+
+
+/* Main menu */
+IDR_MAIN MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                   IDM_FILE_EXIT
+    END
+END
+
+
+/* Main dialog */
+IDD_MAIN DIALOGEX 100, 100, 500, 350
+STYLE WS_OVERLAPPEDWINDOW
+EXSTYLE WS_EX_DLGMODALFRAME
+CAPTION "Theme Explorer"
+MENU IDR_MAIN
+BEGIN
+    CONTROL "", IDC_MAIN_TREEVIEW, WC_TREEVIEW, WS_TABSTOP | TVS_DISABLEDRAGDROP | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS, 5, 5, 180, 340, WS_EX_CLIENTEDGE
+    CONTROL "Class:", -1, "STATIC", SS_LEFT, 190, 10, 20, 10
+    CONTROL "", IDC_MAIN_CLASS, "STATIC", SS_LEFT, 225, 10, 170, 10
+    CONTROL "Part:", -1, "STATIC", SS_LEFT, 190, 20, 20, 10
+    CONTROL "", IDC_MAIN_PART, "STATIC", SS_LEFT, 225, 20, 170, 10
+    CONTROL "State:", -1, "STATIC", SS_LEFT, 190, 30, 20, 10
+    CONTROL "", IDC_MAIN_STATE, "STATIC", SS_LEFT, 225, 30, 170, 10
+    CONTROL "", IDC_MAIN_THEMEVIEW_1, THEMEVIEW_CLASS, 0, 190, 45, 10, 10
+    CONTROL "", IDC_MAIN_THEMEVIEW_2, THEMEVIEW_CLASS, 0, 235, 45, 20, 10
+    CONTROL "", IDC_MAIN_THEMEVIEW_7, THEMEVIEW_CLASS, THEMEVIEW_STYLE_DRAWTEXT, 320, 45, 20, 10
+    CONTROL "", IDC_MAIN_THEMEVIEW_3, THEMEVIEW_CLASS, 0, 190, 60, 20, 20
+    CONTROL "", IDC_MAIN_THEMEVIEW_4, THEMEVIEW_CLASS, 0, 235, 60, 40, 20
+    CONTROL "", IDC_MAIN_THEMEVIEW_8, THEMEVIEW_CLASS, THEMEVIEW_STYLE_DRAWTEXT, 320, 60, 40, 20
+    CONTROL "", IDC_MAIN_THEMEVIEW_5, THEMEVIEW_CLASS, 0, 190, 85, 40, 40
+    CONTROL "", IDC_MAIN_THEMEVIEW_6, THEMEVIEW_CLASS, 0, 235, 85, 80, 40
+    CONTROL "", IDC_MAIN_THEMEVIEW_9, THEMEVIEW_CLASS, THEMEVIEW_STYLE_DRAWTEXT, 320, 85, 80, 40
+    CONTROL "", IDC_MAIN_BITMAP_BKG, "STATIC", SS_BITMAP, 410, 10, 40, 120
+    CONTROL "", IDC_MAIN_BITMAP_GLYPH, "STATIC", SS_BITMAP, 500, 10, 40, 120
+    CONTROL "", IDC_MAIN_PROPSLIST, WC_LISTVIEW, WS_TABSTOP | WS_BORDER | LVS_REPORT, 190, 135, 305, 210
+END
