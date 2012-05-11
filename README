@@ -27,5 +27,5 @@ option) any later version. Refer to the file COPYING for more details.
 System requirements
 ===================
 
-To run it, you need MS Windows XP or newer (UXTHEME.DLL), and to be really
-useful, you musthave visual styles enabled in your Windows.
+To run it, you need MS Windows XP or newer (because of UXTHEME.DLL), and to
+be really useful, you must have visual styles enabled in your Windows.
