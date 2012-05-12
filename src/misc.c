@@ -70,7 +70,7 @@ te_dlgbox(const TCHAR* dlg_name, HWND parent, DLGPROC proc)
     //GetThemeSysFont(NULL, TMT_MSGBOXFONT, &lf);
     if(te_win_version < TE_WIN_VISTA) {
         lf.lfHeight = 8;
-        wcscpy(lf.lfFaceName, L"MS Shell Dlg");
+        wcscpy(lf.lfFaceName, L"MS Shell Dlg 2");
     } else {
         lf.lfHeight = 9;
         wcscpy(lf.lfFaceName, L"Segoe UI");
@@ -86,20 +86,22 @@ te_dlgbox(const TCHAR* dlg_name, HWND parent, DLGPROC proc)
         DWORD style = DATA_DWORD(12);
         DWORD n = 26;
         DWORD skip = 0;
+        DWORD off;
         
         //n += (DATA_WORD(n) == 0xffff) ? 4 : (wcslen(DATA_STRING(n)) + 1) * sizeof(WCHAR);   /* dialog menu */
         if(DATA_WORD(n) == 0xffff)
             n += 4;
         else
             n += (wcslen(DATA_STRING(n)) + 1) * sizeof(WCHAR);
-        n += (wcslen(DATA_STRING(n)) + 1) * sizeof(WCHAR);                                  /* dialog class */
-        n += (wcslen(DATA_STRING(n)) + 1) * sizeof(WCHAR);                                  /* dialog caption */
+        n += (wcslen(DATA_STRING(n)) + 1) * sizeof(WCHAR);      /* dialog class */
+        n += (wcslen(DATA_STRING(n)) + 1) * sizeof(WCHAR);      /* dialog caption */
         
         if(style & (DS_SHELLFONT | DS_SETFONT))
             skip += 6 + (wcslen(DATA_STRING(n+6)) + 1) * sizeof(WCHAR);
+        skip = ((n + skip + 3) & 0xfffc) - n;
         style |= DS_SHELLFONT;
         
-        tmp = _malloca(size - skip + 32);
+        tmp = _malloca(size - skip + 64);
         if(tmp == NULL)
             goto err;
         
@@ -112,7 +114,10 @@ te_dlgbox(const TCHAR* dlg_name, HWND parent, DLGPROC proc)
         memcpy(tmp + n + 5, &charset, 1);
         memcpy(tmp + n + 6, lf.lfFaceName, lf_facesize);
         
-        memcpy(tmp + n + 6 + lf_facesize, data + n + skip, size - skip - n);
+        off = n + 6 + lf_facesize;
+        off = (off + 3) & 0xfffc;
+
+        memcpy(tmp + off, data + n + skip, size - skip - n);
     } else if(size >= 18) {
         /* DLGTEMPLATE (see http://blogs.msdn.com/b/oldnewthing/archive/2004/06/23/163596.aspx) */
         // TODO
