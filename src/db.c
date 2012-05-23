@@ -2007,7 +2007,8 @@ static const db_class_t db_classes_helper[] = {
     DB_DEFINE_CLASS(TreeView,                                       db_parts_TREEVIEW),
         DB_DEFINE_CLASS(Explorer::TreeView,                         db_parts_TREEVIEW),
   /*DB_DEFINE_CLASS(WindowStyle,                                    db_parts_WINDOW),*/
-    DB_DEFINE_CLASS(Window,                                         db_parts_WINDOW)
+    DB_DEFINE_CLASS(Window,                                         db_parts_WINDOW),
+    DB_DEFINE_CLASS(CompositedWindow::Window,                       db_parts_WINDOW)
 };
 
 const db_class_t* db_classes = db_classes_helper;
