@@ -86,7 +86,7 @@ static const db_part_t db_parts_AEROWIZARD[] = {
  *** Button ***
  **************/
 
-static const db_state_t db_states_BP_PUSBUTTON[] = {
+static const db_state_t db_states_BP_PUSHBUTTON[] = {
     DB_DEFINE_STATE(1,  PBS_NORMAL,               Normal),
     DB_DEFINE_STATE(2,  PBS_HOT,                  Hot),
     DB_DEFINE_STATE(3,  PBS_PRESSED,              Pressed),
@@ -152,7 +152,7 @@ static const db_state_t db_states_BP_COMMANDLINKGLYPH[] = {
 };
 
 static const db_part_t db_parts_BUTTON[] = {
-    DB_DEFINE_PART(1,  BP_PUSBUTTON,         PushButton,        db_states_BP_PUSBUTTON),
+    DB_DEFINE_PART(1,  BP_PUSHBUTTON,        PushButton,        db_states_BP_PUSHBUTTON),
     DB_DEFINE_PART(2,  BP_RADIOBUTTON,       RadioButton,       db_states_BP_RADIOBUTTON),
     DB_DEFINE_PART(3,  BP_CHECKBOX,          CheckBox,          db_states_BP_CHECKBOX),
     DB_DEFINE_PART(4,  BP_GROUPBOX,          GroupBox,          db_states_BP_GROUPBOX),
@@ -321,10 +321,10 @@ static const db_state_t db_states_DP_DATEBORDER[] = {
 };
 
 static const db_state_t db_states_DP_SHOWCALENDARBUTTONRIGHT[] = {
-	DB_DEFINE_STATE(1,  DPSBC_NORMAL,    Normal),
-	DB_DEFINE_STATE(2,  DPSBC_HOT,       Hot),
-	DB_DEFINE_STATE(3,  DPSBC_FOCUSED,   Focused),
-	DB_DEFINE_STATE(4,  DPSBC_DISABLED,  Disabled)
+	DB_DEFINE_STATE(1,  DPSCBR_NORMAL,    Normal),
+	DB_DEFINE_STATE(2,  DPSCBR_HOT,       Hot),
+	DB_DEFINE_STATE(3,  DPSCBR_PRESSED,   Pressed),
+	DB_DEFINE_STATE(4,  DPSCBR_DISABLED,  Disabled)
 };
 
 static const db_part_t db_parts_DATEPICKER[] = {
@@ -935,10 +935,10 @@ static const db_state_t db_states_MC_GRIDCELLUPPER[] = {
 };
 
 static const db_state_t db_states_MC_TRAILINGGRIDCELL[] = {
-    DB_DEFINE_STATE(1,  MCGTC_HOT,          Hot),
-	DB_DEFINE_STATE(2,  MCGTC_HASSTATE,     HasState),
-	DB_DEFINE_STATE(3,  MCGTC_HASSTATEHOT,  HasStateHot),
-    DB_DEFINE_STATE(4,  MCGTC_TODAY,        Today)
+    DB_DEFINE_STATE(1,  MCTGC_HOT,          Hot),
+    DB_DEFINE_STATE(2,  MCTGC_HASSTATE,     HasState),
+    DB_DEFINE_STATE(3,  MCTGC_HASSTATEHOT,  HasStateHot),
+    DB_DEFINE_STATE(4,  MCTGC_TODAY,        Today)
 };
 
 static const db_state_t db_states_MC_TRAILINGGRIDCELLUPPER[] = {
