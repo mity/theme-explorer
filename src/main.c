@@ -196,8 +196,6 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
                 PROPERTYORIGIN origin;
                 TCHAR buffer[256];
                 
-                OutputDebugString(prop->name);
-                
                 if(prop->id == TS_MIN  ||   prop->id == TS_TRUE  ||  prop->id == TS_DRAW) {
                     if(part->id != 0)
                         origin = PO_PART;
