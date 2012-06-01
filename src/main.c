@@ -171,9 +171,17 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
             fn_GetThemeBitmap(theme, part->id, state->id, TMT_DIBDATA, GBF_DIRECT, &bmp);            
         SendDlgItemMessage(win, IDC_MAIN_BITMAP_BKG, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)bmp);
 
-        bmp = NULL;
-        if(theme  &&  fn_GetThemeBitmap)
-            fn_GetThemeBitmap(theme, part->id, state->id, TMT_GLYPHDIBDATA, GBF_DIRECT, &bmp);
+        /* Stupid workaround. Seems there is a bug either in Windows headers
+         * or GetThemeBitmap() implementation. Headers define TMT_GLYPHDIBDATA
+         * as 8, but on Windows 7 it always fails. Instead it works for 3.
+         * One of those seems to be buggy.
+         */
+        if(theme  &&  fn_GetThemeBitmap) {
+            HRESULT hr;
+            hr = fn_GetThemeBitmap(theme, part->id, state->id, 3, GBF_DIRECT, &bmp);
+            if(FAILED(hr))
+                fn_GetThemeBitmap(theme, part->id, state->id, TMT_GLYPHDIBDATA, GBF_DIRECT, &bmp);
+        }
         SendDlgItemMessage(win, IDC_MAIN_BITMAP_GLYPH, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)bmp);
     }
     
