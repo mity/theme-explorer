@@ -32,11 +32,14 @@
 
 
 
-/*********************
- *** Common states ***
- *********************/
+/***************
+ *** Dummies ***
+ ***************/
 
 static const db_state_t db_states_EMPTY[] = {
+};
+
+static const db_part_t db_parts_EMPTY[] = {
 };
 
 
@@ -1269,8 +1272,8 @@ static const db_state_t db_states_SPP_MOREPROGRAMSARROW[] = {
     DB_DEFINE_STATE(1,  SPS_NORMAL,    Normal),
 	DB_DEFINE_STATE(2,  SPS_HOT,       Hot),
 	DB_DEFINE_STATE(3,  SPS_PRESSED,   Pressed)
-};                       
-                         
+};
+
 static const db_state_t db_states_SPP_LOGOFFBUTTONS[] = {
     DB_DEFINE_STATE(1,  SPLS_NORMAL,    Normal),
 	DB_DEFINE_STATE(2,  SPLS_HOT,       Hot),
@@ -1875,39 +1878,55 @@ static const db_part_t db_parts_WINDOW[] = {
 static const db_class_t db_classes_helper[] = {
     DB_DEFINE_CLASS(AddressBand,                                    db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(AB::AddressBand,                            db_parts_ADDRESSBAND),
+        DB_DEFINE_CLASS(ABComposited::AddressBand,                  db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(ABGreen::AddressBand,                       db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(ABGreenComposited::AddressBand,             db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(ABRed::AddressBand,                         db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(ABRedComposited::AddressBand,               db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(ABYellow::AddressBand,                      db_parts_ADDRESSBAND),
         DB_DEFINE_CLASS(ABYellowComposited::AddressBand,            db_parts_ADDRESSBAND),
-  /*DB_DEFINE_CLASS(AeroWizardStyle,                                db_parts_AEROWIZARD),*/
     DB_DEFINE_CLASS(AeroWizard,                                     db_parts_AEROWIZARD),
-  /*DB_DEFINE_CLASS(ButtonStyle,                                    db_parts_BUTTON),*/
     DB_DEFINE_CLASS(Button,                                         db_parts_BUTTON),
+        DB_DEFINE_CLASS(InfoPaneButton::Button,                     db_parts_BUTTON),
+        DB_DEFINE_CLASS(InfoPaneStatic::Button,                     db_parts_BUTTON),
+        DB_DEFINE_CLASS(ShowDesktop::Button,                        db_parts_BUTTON),
+        DB_DEFINE_CLASS(VerticalShowDesktop::Button,                db_parts_BUTTON),
+        DB_DEFINE_CLASS(Start::Button,                              db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyHoriz::Button,                    db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyHorizComposited::Button,          db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyHorizOpen::Button,                db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyHorizOpenComposited::Button,      db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyVert::Button,                     db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyVertComposited::Button,           db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyVertOpen::Button,                 db_parts_BUTTON),
+        DB_DEFINE_CLASS(TrayNotifyVertOpenComposited::Button,       db_parts_BUTTON),
     DB_DEFINE_CLASS(Clock,                                          db_parts_CLOCK),
-  /*DB_DEFINE_CLASS(ComboboxStyle,                                  db_parts_COMBOBOX),*/
+        DB_DEFINE_CLASS(TrayNotify::Clock,                          db_parts_CLOCK),
+        DB_DEFINE_CLASS(TrayNotifyComposited::Clock,                db_parts_CLOCK),
     DB_DEFINE_CLASS(Combobox,                                       db_parts_COMBOBOX),
         DB_DEFINE_CLASS(Address::Combobox,                          db_parts_COMBOBOX),
         DB_DEFINE_CLASS(AddressComposited::Combobox,                db_parts_COMBOBOX),
+        DB_DEFINE_CLASS(Communications::Combobox,                   db_parts_COMBOBOX),
         DB_DEFINE_CLASS(InactiveAddress::Combobox,                  db_parts_COMBOBOX),
         DB_DEFINE_CLASS(InactiveAddressComposited::Combobox,        db_parts_COMBOBOX),
         DB_DEFINE_CLASS(MaxAddress::Combobox,                       db_parts_COMBOBOX),
         DB_DEFINE_CLASS(MaxAddressComposited::Combobox,             db_parts_COMBOBOX),
         DB_DEFINE_CLASS(MaxInactiveAddress::Combobox,               db_parts_COMBOBOX),
         DB_DEFINE_CLASS(MaxInactiveAddressComposited::Combobox,     db_parts_COMBOBOX),
-  /*DB_DEFINE_CLASS(CommunicationsStyle,                            db_parts_COMMUNICATIONS),*/
+        DB_DEFINE_CLASS(TaskbarComposited::Combobox,                db_parts_COMBOBOX),
     DB_DEFINE_CLASS(Communications,                                 db_parts_COMMUNICATIONS),
-  /*DB_DEFINE_CLASS(ControlPanelStyle,                              db_parts_CONTROLPANEL),*/
     DB_DEFINE_CLASS(ControlPanel,                                   db_parts_CONTROLPANEL),
-  /*DB_DEFINE_CLASS(DatePickerStyle,                                db_parts_DATEPICKER),*/
     DB_DEFINE_CLASS(DatePicker,                                     db_parts_DATEPICKER),
-  /*DB_DEFINE_CLASS(DragDropStyle,                                  db_parts_DRAGDROP),*/
     DB_DEFINE_CLASS(DragDrop,                                       db_parts_DRAGDROP),
-  /*DB_DEFINE_CLASS(EditStyle,                                      db_parts_EDIT),*/
     DB_DEFINE_CLASS(Edit,                                           db_parts_EDIT),
         DB_DEFINE_CLASS(Address::Edit,                              db_parts_EDIT),
         DB_DEFINE_CLASS(AddressComposited::Edit,                    db_parts_EDIT),
+        DB_DEFINE_CLASS(CommonItemDialogPreviewPaneControl::Edit,   db_parts_EDIT),
+        DB_DEFINE_CLASS(DocumentsPreviewPaneControl::Edit,          db_parts_EDIT),
+        DB_DEFINE_CLASS(EditComposited::Edit,                       db_parts_EDIT),
+        DB_DEFINE_CLASS(Explorer::Edit,                             db_parts_EDIT),
+        DB_DEFINE_CLASS(GenericPreviewPaneControl::Edit,            db_parts_EDIT),
+        DB_DEFINE_CLASS(Help::Edit,                                 db_parts_EDIT),
         DB_DEFINE_CLASS(InactiveAddress::Edit,                      db_parts_EDIT),
         DB_DEFINE_CLASS(InactiveAddressComposited::Edit,            db_parts_EDIT),
         DB_DEFINE_CLASS(InactiveSearchBoxEdit::Edit,                db_parts_EDIT),
@@ -1920,46 +1939,65 @@ static const db_class_t db_classes_helper[] = {
         DB_DEFINE_CLASS(MaxInactiveSearchBoxEditComposited::Edit,   db_parts_EDIT),
         DB_DEFINE_CLASS(MaxSearchBoxEdit::Edit,                     db_parts_EDIT),
         DB_DEFINE_CLASS(MaxSearchBoxEditComposited::Edit,           db_parts_EDIT),
+        DB_DEFINE_CLASS(MusicPreviewPaneControl::Edit,              db_parts_EDIT),
+        DB_DEFINE_CLASS(PhotoPreviewPaneControl::Edit,              db_parts_EDIT),
         DB_DEFINE_CLASS(SearchBoxEdit::Edit,                        db_parts_EDIT),
         DB_DEFINE_CLASS(SearchBoxEditComposited::Edit,              db_parts_EDIT),
+        DB_DEFINE_CLASS(TaskBarComposited::Edit,                    db_parts_EDIT),
     DB_DEFINE_CLASS(EmptyMarkup,                                    db_parts_EMPTYMARKUP),
-  /*DB_DEFINE_CLASS(ExplorerBarStyle,                               db_parts_EXPLORERBAR),*/
+        DB_DEFINE_CLASS(StartMenuComposited::EmptyMarkup,           db_parts_EMPTYMARKUP),
     DB_DEFINE_CLASS(ExplorerBar,                                    db_parts_EXPLORERBAR),
-  /*DB_DEFINE_CLASS(FlyoutStyle,                                    db_parts_FLYOUT),*/
     DB_DEFINE_CLASS(Flyout,                                         db_parts_FLYOUT),
     DB_DEFINE_CLASS(Globals,                                        db_parts_GLOBALS),
-  /*DB_DEFINE_CLASS(HeaderStyle,                                    db_parts_HEADER),*/
     DB_DEFINE_CLASS(Header,                                         db_parts_HEADER),
+        DB_DEFINE_CLASS(ItemsView::Header,                          db_parts_HEADER),
     DB_DEFINE_CLASS(Link,                                           db_parts_LINK),
-  /*DB_DEFINE_CLASS(ListBoxStyle,                                   db_parts_LISTBOX),*/
+        DB_DEFINE_CLASS(StartMenuComposited::Link,                  db_parts_LINK),
     DB_DEFINE_CLASS(ListBox,                                        db_parts_LISTBOX),
-  /*DB_DEFINE_CLASS(ListViewStyle,                                  db_parts_LISTVIEW),*/
     DB_DEFINE_CLASS(ListView,                                       db_parts_LISTVIEW),
         DB_DEFINE_CLASS(Explorer::ListView,                         db_parts_LISTVIEW),
-  /*DB_DEFINE_CLASS(MenuStyle,                                      db_parts_MENU),*/
+        DB_DEFINE_CLASS(ItemsView::ListView,                        db_parts_LISTVIEW),
+        DB_DEFINE_CLASS(StartMenu::ListView,                        db_parts_LISTVIEW),
+        DB_DEFINE_CLASS(StartMenuComposited::ListView,              db_parts_LISTVIEW),
+        DB_DEFINE_CLASS(StartMenuCompositedMFU::ListView,           db_parts_LISTVIEW),
+        DB_DEFINE_CLASS(StartMenuPlaceListComposited::ListView,     db_parts_LISTVIEW),
+        DB_DEFINE_CLASS(TopMatch::ListView,                         db_parts_LISTVIEW),
+        DB_DEFINE_CLASS(TopMatchComposited::ListView,               db_parts_LISTVIEW),
     DB_DEFINE_CLASS(Menu,                                           db_parts_MENU),
+        DB_DEFINE_CLASS(Communications::Menu,                       db_parts_MENU),
+        DB_DEFINE_CLASS(Media::Menu,                                db_parts_MENU),
     DB_DEFINE_CLASS(MenuBand,                                       db_parts_MENUBAND),
+        DB_DEFINE_CLASS(ExplorerMenu::MenuBand,                     db_parts_MENUBAND),
+        DB_DEFINE_CLASS(StartMenu::MenuBand,                        db_parts_MENUBAND),
     DB_DEFINE_CLASS(MonthCal,                                       db_parts_MONTHCAL),
     DB_DEFINE_CLASS(Navigation,                                     db_parts_NAVIGATION),
     DB_DEFINE_CLASS(Page,                                           db_parts_PAGE),
-  /*DB_DEFINE_CLASS(ProgressStyle,                                  db_parts_PROGRESS),*/
     DB_DEFINE_CLASS(Progress,                                       db_parts_PROGRESS),
-  /*DB_DEFINE_CLASS(RebarStyle,                                     db_parts_REBAR),*/
+        DB_DEFINE_CLASS(Indeterminate::Progress,                    db_parts_PROGRESS),
     DB_DEFINE_CLASS(Rebar,                                          db_parts_REBAR),
+        DB_DEFINE_CLASS(AlternateRebar::Rebar,                      db_parts_REBAR),
         DB_DEFINE_CLASS(BrowserTabBar::Rebar,                       db_parts_REBAR),
         DB_DEFINE_CLASS(Communications::Rebar,                      db_parts_REBAR),
+        DB_DEFINE_CLASS(Default::Rebar,                             db_parts_REBAR),
+        DB_DEFINE_CLASS(ExplorerBar::Rebar,                         db_parts_REBAR),
+        DB_DEFINE_CLASS(Help::Rebar,                                db_parts_REBAR),
         DB_DEFINE_CLASS(InactiveNavbar::Rebar,                      db_parts_REBAR),
         DB_DEFINE_CLASS(InactiveNavbarComposited::Rebar,            db_parts_REBAR),
+        DB_DEFINE_CLASS(ITBarBase::Rebar,                           db_parts_REBAR),
         DB_DEFINE_CLASS(MaxInactiveNavbar::Rebar,                   db_parts_REBAR),
         DB_DEFINE_CLASS(MaxInactiveNavbarComposited::Rebar,         db_parts_REBAR),
         DB_DEFINE_CLASS(MaxNavbar::Rebar,                           db_parts_REBAR),
         DB_DEFINE_CLASS(MaxNavbarComposited::Rebar,                 db_parts_REBAR),
         DB_DEFINE_CLASS(Media::Rebar,                               db_parts_REBAR),
         DB_DEFINE_CLASS(Navbar::Rebar,                              db_parts_REBAR),
+        DB_DEFINE_CLASS(NavbarBase::Rebar,                          db_parts_REBAR),
         DB_DEFINE_CLASS(NavbarComposited::Rebar,                    db_parts_REBAR),
         DB_DEFINE_CLASS(NavbarNonTopmost::Rebar,                    db_parts_REBAR),
-  /*DB_DEFINE_CLASS(ScrollbarStyle,                                 db_parts_SCROLLBAR),*/
+        DB_DEFINE_CLASS(TaskBar::Rebar,                             db_parts_REBAR),
+        DB_DEFINE_CLASS(TaskBarComposited::Rebar,                   db_parts_REBAR),
     DB_DEFINE_CLASS(Scrollbar,                                      db_parts_SCROLLBAR),
+        DB_DEFINE_CLASS(TaskBand2::ScrollBar,                       db_parts_SCROLLBAR),
+        DB_DEFINE_CLASS(TaskBand2Composited::ScrollBar,             db_parts_SCROLLBAR),
     DB_DEFINE_CLASS(SearchEditBox,                                  db_parts_SEARCHEDITBOX),
     DB_DEFINE_CLASS(SearchBox,                                      db_parts_SEARCHBOX),
         DB_DEFINE_CLASS(InactiveSearchBox::SearchBox,               db_parts_SEARCHBOX),
@@ -1969,46 +2007,72 @@ static const db_class_t db_classes_helper[] = {
         DB_DEFINE_CLASS(MaxSearchBox::SearchBox,                    db_parts_SEARCHBOX),
         DB_DEFINE_CLASS(MaxSearchBoxComposited::SearchBox,          db_parts_SEARCHBOX),
         DB_DEFINE_CLASS(SearchBoxComposited::SearchBox,             db_parts_SEARCHBOX),
-  /*DB_DEFINE_CLASS(SpinStyle,                                      db_parts_SPIN),*/
     DB_DEFINE_CLASS(Spin,                                           db_parts_SPIN),
     DB_DEFINE_CLASS(StartPanel,                                     db_parts_STARTPANEL),
+    DB_DEFINE_CLASS(StartPanelPriv,                                 db_parts_STARTPANEL),
+        DB_DEFINE_CLASS(StartPanelComposited::StartPanelPriv,       db_parts_STARTPANEL),
+        DB_DEFINE_CLASS(StartPanelCompositedBottom::StartPanelPriv, db_parts_STARTPANEL),
     DB_DEFINE_CLASS(Static,                                         db_parts_STATIC),
-  /*DB_DEFINE_CLASS(StatusStyle,                                    db_parts_STATUS),*/
     DB_DEFINE_CLASS(Status,                                         db_parts_STATUS),
-  /*DB_DEFINE_CLASS(TabStyle,                                       db_parts_TAB),*/
     DB_DEFINE_CLASS(Tab,                                            db_parts_TAB),
         DB_DEFINE_CLASS(BrowserTab::Tab,                            db_parts_TAB),
     DB_DEFINE_CLASS(TaskBand,                                       db_parts_TASKBAND),
     DB_DEFINE_CLASS(TaskBar,                                        db_parts_TASKBAR),
-  /*DB_DEFINE_CLASS(TaskDialogStyle,                                db_parts_TASKDIALOG),*/
+        DB_DEFINE_CLASS(TaskBarComposited::TaskBar,                 db_parts_TASKBAR),
+        DB_DEFINE_CLASS(TaskBar2::TaskBar,                          db_parts_TASKBAR),
+        DB_DEFINE_CLASS(TaskBar2Composited::TaskBar,                db_parts_TASKBAR),
     DB_DEFINE_CLASS(TaskDialog,                                     db_parts_TASKDIALOG),
     DB_DEFINE_CLASS(TextStyle,                                      db_parts_TEXTSTYLE),
-  /*DB_DEFINE_CLASS(ToolbarStyle,                                   db_parts_TOOLBAR),*/
     DB_DEFINE_CLASS(Toolbar,                                        db_parts_TOOLBAR),
         DB_DEFINE_CLASS(Alternate::Toolbar,                         db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(BB::Toolbar,                                db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(BBComposited::Toolbar,                      db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(Communications::Toolbar,                    db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(ExplorerBar::Toolbar,                       db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(ExplorerMenu::Toolbar,                      db_parts_TOOLBAR),
         DB_DEFINE_CLASS(Go::Toolbar,                                db_parts_TOOLBAR),
         DB_DEFINE_CLASS(GoComposited::Toolbar,                      db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(InactiveBB::Toolbar,                        db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(InactiveBBComposited::Toolbar,              db_parts_TOOLBAR),
         DB_DEFINE_CLASS(InactiveGo::Toolbar,                        db_parts_TOOLBAR),
         DB_DEFINE_CLASS(InactiveGoComposited::Toolbar,              db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(InfoPaneToolbar::Toolbar,                   db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(LVPopup::Toolbar,                           db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(LVPopupBottom::Toolbar,                     db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(MaxBB::Toolbar,                             db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(MaxBBComposited::Toolbar,                   db_parts_TOOLBAR),
         DB_DEFINE_CLASS(MaxGo::Toolbar,                             db_parts_TOOLBAR),
         DB_DEFINE_CLASS(MaxGoComposited::Toolbar,                   db_parts_TOOLBAR),
         DB_DEFINE_CLASS(MaxInactiveGo::Toolbar,                     db_parts_TOOLBAR),
         DB_DEFINE_CLASS(MaxInactiveGoComposited::Toolbar,           db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(Media::Toolbar,                             db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(Placesbar::Toolbar,                         db_parts_TOOLBAR),
         DB_DEFINE_CLASS(SearchButton::Toolbar,                      db_parts_TOOLBAR),
         DB_DEFINE_CLASS(SearchButtonComposited::Toolbar,            db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(StartMenu::Toolbar,                         db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(TaskBar::Toolbar,                           db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(TaskBarComposited::Toolbar,                 db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(TaskBarVert::Toolbar,                       db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(TaskBarVertComposited::Toolbar,             db_parts_TOOLBAR),
         DB_DEFINE_CLASS(Travel::Toolbar,                            db_parts_TOOLBAR),
         DB_DEFINE_CLASS(TravelComposited::Toolbar,                  db_parts_TOOLBAR),
-  /*DB_DEFINE_CLASS(TooltipStyle,                                   db_parts_TOOLTIP),*/
+        DB_DEFINE_CLASS(TrayNotify::Toolbar,                        db_parts_TOOLBAR),
+        DB_DEFINE_CLASS(TrayNotifyComposited::Toolbar,              db_parts_TOOLBAR),
     DB_DEFINE_CLASS(Tooltip,                                        db_parts_TOOLTIP),
-  /*DB_DEFINE_CLASS(TrackbarStyle,                                  db_parts_TRACKBAR),*/
-    DB_DEFINE_CLASS(Trackbar,                                       db_parts_TRACKBAR),
+    DB_DEFINE_CLASS(TrackBar,                                       db_parts_TRACKBAR),
     DB_DEFINE_CLASS(TrayNotify,                                     db_parts_TRAYNOTIFY),
-  /*DB_DEFINE_CLASS(TreeViewStyle,                                  db_parts_TREEVIEW),*/
+        DB_DEFINE_CLASS(TrayNotifyHoriz::TrayNotify,                db_parts_TRAYNOTIFY),
+        DB_DEFINE_CLASS(TrayNotifyHorizComposited::TrayNotify,      db_parts_TRAYNOTIFY),
+        DB_DEFINE_CLASS(TrayNotifyVert::TrayNotify,                 db_parts_TRAYNOTIFY),
+        DB_DEFINE_CLASS(TrayNotifyVertComposited::TrayNotify,       db_parts_TRAYNOTIFY),
     DB_DEFINE_CLASS(TreeView,                                       db_parts_TREEVIEW),
         DB_DEFINE_CLASS(Explorer::TreeView,                         db_parts_TREEVIEW),
-  /*DB_DEFINE_CLASS(WindowStyle,                                    db_parts_WINDOW),*/
+        DB_DEFINE_CLASS(StartMenuKeyBoard::TreeView,                db_parts_TREEVIEW),
+        DB_DEFINE_CLASS(StartMenuKeyBoardComposited::TreeView,      db_parts_TREEVIEW),
+        DB_DEFINE_CLASS(StartMenuHover::TreeView,                   db_parts_TREEVIEW),
+        DB_DEFINE_CLASS(StartMenuHoverComposited::TreeView,         db_parts_TREEVIEW),
     DB_DEFINE_CLASS(Window,                                         db_parts_WINDOW),
-    DB_DEFINE_CLASS(CompositedWindow::Window,                       db_parts_WINDOW)
+        DB_DEFINE_CLASS(CompositedWindow::Window,                       db_parts_WINDOW)
 };
 
 const db_class_t* db_classes = db_classes_helper;
@@ -2329,8 +2393,8 @@ db_to_string_TMT_FONT(HTHEME theme, int part, int state, int prop, TCHAR* buffer
         default:             weight = _T(" ??"); break;
     }
 
-    _sntprintf(buffer, bufsize, _T("%s,%d%s%s%s"), 
-               lf.lfFaceName, lf.lfHeight, weight, 
+    _sntprintf(buffer, bufsize, _T("%s,%d%s%s%s"),
+               lf.lfFaceName, lf.lfHeight, weight,
                lf.lfUnderline ? _T(" underlined") : _T(""),
                lf.lfItalic ? _T(" italic") : _T(""));
 }
