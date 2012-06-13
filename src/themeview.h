@@ -22,7 +22,7 @@
 
 void themeview_init(void);
 
-void themeview_setup(HWND win, const WCHAR* cls_name, int part, int state);
+void themeview_setup(HWND win, const WCHAR* cls_name, const WCHAR* subcls_name, int part, int state);
 
 
 #endif  /* TE_THEMEVIEW_H */

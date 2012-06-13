@@ -142,14 +142,19 @@ static void
 main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_state_t* state)
 {
     HTHEME theme;
+    HWND dummy;
     
-    theme = OpenThemeData(win, cls->name);
+    dummy = GetDlgItem(win, IDC_MAIN_DUMMY);
+    
+    SetWindowTheme(dummy, cls->subclass, NULL);
+    theme = OpenThemeData(dummy, cls->name);
     
     /* Reset titles */
     {
         TCHAR buffer[128];
 
-        SendDlgItemMessage(win, IDC_MAIN_CLASS, WM_SETTEXT, 0, (LPARAM) cls->name);
+        db_class_display_name(cls, buffer, 128);
+        SendDlgItemMessage(win, IDC_MAIN_CLASS, WM_SETTEXT, 0, (LPARAM) buffer);
 
         _sntprintf(buffer, TE_ARRAY_SIZE(buffer), _T("[%d] %s"), part->id, part->name ? part->name : _T(""));
         SendDlgItemMessage(win, IDC_MAIN_PART, WM_SETTEXT, 0, (LPARAM) buffer);
@@ -164,7 +169,7 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
         int i;
         
         for(i = IDC_MAIN_THEMEVIEW_FIRST; i <= IDC_MAIN_THEMEVIEW_LAST; i++)
-            themeview_setup(GetDlgItem(win, i), cls->name, part->id, state->id);
+            themeview_setup(GetDlgItem(win, i), cls->name, cls->subclass, part->id, state->id);
 
         bmp = NULL;
         if(theme  &&  fn_GetThemeBitmap)

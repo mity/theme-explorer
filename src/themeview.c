@@ -34,14 +34,16 @@ struct themeview_tag {
 
 
 void
-themeview_setup(HWND win, const WCHAR* cls_name, int part, int state)
+themeview_setup(HWND win, const WCHAR* cls_name, const WCHAR* subcls_name, int part, int state)
 {
     themeview_t* tv = (themeview_t*) GetWindowLongPtr(win, 0);
     
     tv->cls_name = cls_name;
     tv->part_id = part;
     tv->state_id = state;
-    
+
+    SetWindowTheme(win, subcls_name, NULL);
+        
     InvalidateRect(win, NULL, TRUE);
 }
 
