@@ -312,9 +312,41 @@ main_wm_command(HWND win, UINT ctl_id)
     }
 }
 
+static void
+main_wm_size(HWND win, UINT w, UINT h)
+{
+    static WORD old_w = 0;
+    static WORD old_h = 0;
 
-static WORD old_w = 0;
-static WORD old_h = 0;
+    if(old_w != 0 && old_h != 0) {
+        RECT rect;
+        
+        GetWindowRect(GetDlgItem(win, IDC_MAIN_TREEVIEW), &rect);
+        MapWindowPoints(NULL, win, (POINT*)&rect, 2);
+        SetWindowPos(GetDlgItem(win, IDC_MAIN_TREEVIEW), NULL,
+                     rect.left, rect.top, rect.right - rect.left,
+                     rect.bottom - rect.top + h - old_h,
+                     SWP_NOZORDER);
+
+        GetWindowRect(GetDlgItem(win, IDC_MAIN_PROPSLIST), &rect);
+        MapWindowPoints(NULL, win, (POINT*)&rect, 2);
+        SetWindowPos(GetDlgItem(win, IDC_MAIN_PROPSLIST), NULL,
+                     rect.left, rect.top,
+                     rect.right - rect.left + w - old_w,
+                     rect.bottom - rect.top + h - old_h,
+                     SWP_NOZORDER | SWP_NOMOVE);
+    }
+    
+    old_w = w;
+    old_h = h;
+}
+
+static void
+main_wm_getminmaxinfo(HWND win, MINMAXINFO* mmi)
+{
+    mmi->ptMinTrackSize.x = 600;
+    mmi->ptMinTrackSize.y = 500;
+}
 
 static INT_PTR CALLBACK
 main_proc(HWND win, UINT msg, WPARAM wp, LPARAM lp)
@@ -329,34 +361,14 @@ main_proc(HWND win, UINT msg, WPARAM wp, LPARAM lp)
             break;
         
         case WM_SIZE:
-            if(wp == SIZE_MAXIMIZED || wp == SIZE_RESTORED) {
-                WORD w = LOWORD(lp);
-                WORD h = HIWORD(lp);
-                
-                if(old_w != 0 && old_h != 0) {
-                    RECT rect;
-                    
-                    GetWindowRect(GetDlgItem(win, IDC_MAIN_TREEVIEW), &rect);
-                    MapWindowPoints(NULL, win, (POINT*)&rect, 2);
-                    SetWindowPos(GetDlgItem(win, IDC_MAIN_TREEVIEW), NULL,
-                                 rect.left, rect.top, rect.right - rect.left,
-                                 rect.bottom - rect.top + h - old_h,
-                                 SWP_NOZORDER);
-
-                    GetWindowRect(GetDlgItem(win, IDC_MAIN_PROPSLIST), &rect);
-                    MapWindowPoints(NULL, win, (POINT*)&rect, 2);
-                    SetWindowPos(GetDlgItem(win, IDC_MAIN_PROPSLIST), NULL,
-                                 rect.left, rect.top,
-                                 rect.right - rect.left + w - old_w,
-                                 rect.bottom - rect.top + h - old_h,
-                                 SWP_NOZORDER | SWP_NOMOVE);
-                }
-                
-                old_w = w;
-                old_h = h;
-            }
+            if(wp == SIZE_MAXIMIZED || wp == SIZE_RESTORED)
+                main_wm_size(win, LOWORD(lp), HIWORD(lp));
             break;
-        
+
+        case WM_GETMINMAXINFO:  
+            main_wm_getminmaxinfo(win, (MINMAXINFO*)lp);
+            break;
+
         case WM_COMMAND:
             main_wm_command(win, LOWORD(wp));
             break;
