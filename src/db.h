@@ -51,8 +51,8 @@ struct db_state_tag {
     const TCHAR* display_name;
 };
 
-const db_class_t* db_classes;
-int db_n_classes;
+extern const db_class_t* db_classes;
+extern int db_n_classes;
 
 
 void db_class_display_name(const db_class_t* cls, TCHAR* buffer, UINT bufsize);
@@ -81,8 +81,8 @@ struct db_prop_tag {
     const TCHAR* display_name;    
 };
 
-const db_prop_t* db_props;
-int db_n_props;
+extern const db_prop_t* db_props;
+extern int db_n_props;
 
 
 #endif  /* TE_DB_H */
