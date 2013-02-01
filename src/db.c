@@ -2563,6 +2563,7 @@ static const db_prop_t db_props_helper[] = {
     DB_DEFINE_BOOL(2219,  TMT_COMPOSITEDOPAQUE,      CompositedOpaque),
     DB_DEFINE_BOOL(2220,  TMT_LOCALIZEDMIRRORIMAGE,  LocalizedMirrorImage),
     DB_DEFINE_BOOL(5001,  TMT_USERPICTURE,           UserPicture),
+    DB_DEFINE_BOOL(7001,  TMT_SCALEDBACKGROUND,      ScaledBackground),
 
     DB_DEFINE_COLOR( 204,  TMT_COLOR,                    Color),
     DB_DEFINE_COLOR(1601,  TMT_SCROLLBAR,                ScrollBar),
@@ -2643,7 +2644,6 @@ static const db_prop_t db_props_helper[] = {
     DB_DEFINE_FILENAME(3005,  TMT_IMAGEFILE4,        ImageFile4),
     DB_DEFINE_FILENAME(3006,  TMT_IMAGEFILE5,        ImageFile5),
     DB_DEFINE_FILENAME(3008,  TMT_GLYPHIMAGEFILE,    GlyphImageFile),
-    DB_DEFINE_FILENAME(7001,  TMT_SCALEDBACKGROUND,  ScaledBackground),
 
     DB_DEFINE_SIZE(207,       TMT_SIZE, Size),
     DB_DEFINE_SIZE(TS_MIN,    TS_MIN,   MinSize),
