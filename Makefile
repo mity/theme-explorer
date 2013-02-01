@@ -1,16 +1,18 @@
 
 BASENAME = ThemeExplorer.exe
 
-INCDIR = include
-SRCDIR = src
-BINDIR = bin
-OBJDIR = obj
+INCDIR ?= include
+SRCDIR ?= src
+BINDIR ?= bin
+OBJDIR ?= obj
 
-CC = $(PREFIX)gcc -c
-LD = $(PREFIX)gcc
-WINDRES = $(PREFIX)windres
-DLLTOOL = $(PREFIX)dlltool
-DEP = $(PREFIX)gcc -x c -MM -MG
+GCC ?= gcc
+
+CC = $(GCC) -c
+LD = $(GCC)
+WINDRES = windres
+DLLTOOL = dlltool
+DEP = $(GCC) -x c -MM -MG
 RM = rm -rf
 
 INCLUDES = -I$(INCDIR) -I$(SRCDIR)
@@ -19,20 +21,20 @@ INCLUDES = -I$(INCDIR) -I$(SRCDIR)
 WINVER = -D_WIN32_IE=0x0601 -D_WIN32_WINNT=0x0601 -DWINVER=_WIN32_WINNT
 UNICODE = -DUNICODE -D_UNICODE
 
-CPPFLAGS += $(UNICODE) $(WINVER) $(INCLUDES)
-CFLAGS += -Wall
-LDFLAGS += -mwindows
-LIBS += -lcomctl32 -luxtheme
+override CPPFLAGS += $(UNICODE) $(WINVER) $(INCLUDES)
+override CFLAGS += -Wall
+override LDFLAGS += -mwindows
+override LIBS += -lcomctl32 -luxtheme
 
 ifndef DEBUG
     DEBUG = 0
 endif
 ifneq ($(DEBUG),0)
-	CPPFLAGS += -DDEBUG=$(DEBUG)
-	CFLAGS += -g -O0
+	override CPPFLAGS += -DDEBUG=$(DEBUG)
+	override CFLAGS += -g -O0
 else
-	CFLAGS += -O3
-	LDFLAGS += -s
+	override CFLAGS += -O3
+	override LDFLAGS += -s
 endif
 
 HEADERS = $(wildcard $(SRCDIR)/*.h)
@@ -49,7 +51,7 @@ TARGET = $(BINDIR)/$(BASENAME)
 # The main targets #
 ####################
 
-.PHONY: all clean 
+.PHONY: all clean
 
 all: $(TARGET)
 
