@@ -2648,11 +2648,7 @@ static const db_prop_t db_props_helper[] = {
     DB_DEFINE_SIZE(207,       TMT_SIZE, Size),
     DB_DEFINE_SIZE(TS_MIN,    TS_MIN,   MinSize),
     DB_DEFINE_SIZE(TS_TRUE,   TS_TRUE,  TrueSize),
-#if 0
-    /* FIXME: GetThemePartSize(TS_DRAW) always seems to fail with E_INVALIDARG.
-     *        I have no idea why. */
     DB_DEFINE_SIZE(TS_DRAW,   TS_DRAW,  DrawSize),
-#endif
 
     DB_DEFINE_POSITION( 208,  TMT_POSITION,          Position),
     DB_DEFINE_POSITION(3401,  TMT_OFFSET,            Offset),
