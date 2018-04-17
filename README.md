@@ -18,8 +18,7 @@ The tool as well as its sources can be downloaded from mCtrl website:
 
 ## License
 
-The tool is covered with GNU General Public License version 2 or (at your
-option) any later version. Refer to the file COPYING for more details.
+Theme Explorer is covered with MIT license, see the file `LICENSE.md`.
 
 
 ## System requirements
