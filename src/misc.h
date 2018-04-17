@@ -67,6 +67,11 @@ void te_init(HINSTANCE instance);
 INT_PTR te_dlgbox(const TCHAR* dlg_name, HWND parent, DLGPROC proc);
 
 
+/* Some UXTHEME.DLL functions are only available since more recent Windows
+ * versions. So we wrapper them to keep compatibility with Windows XP. */
+HRESULT te_GetThemeStream(HTHEME hTheme, int iPartId, int iStateId, int iPropId, void** ppvStream, DWORD *pcbStream, HINSTANCE hInst);
+
+#define GetThemeStream      te_GetThemeStream
 
 
 #endif  /* TE_MISC_H */
