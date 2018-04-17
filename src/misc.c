@@ -30,6 +30,7 @@ DWORD te_win_version;
 
 
 static struct {
+    HRESULT (WINAPI* fn_GetThemeBitmap)(HTHEME, int, int, int, ULONG, HBITMAP*);
     HRESULT (WINAPI* fn_GetThemeStream)(HTHEME, int, int, int, void**, DWORD*, HINSTANCE);
 } te_uxtheme_wrappers;
 
@@ -58,6 +59,7 @@ te_init(HINSTANCE instance)
                         GetProcAddress(uxtheme_dll, #name);                    \
         } while(0)
 
+        GPA(GetThemeBitmap, (HTHEME, int, int, int, ULONG, HBITMAP*));
         GPA(GetThemeStream, (HTHEME, int, int, int, void**, DWORD*, HINSTANCE));
     }
 }
@@ -161,10 +163,22 @@ err:
 
 
 HRESULT
+te_GetThemeBitmap(HTHEME hTheme, int iPartId, int iStateId, int iPropId, ULONG dwFlags, HBITMAP *phBitmap)
+{
+    if(te_uxtheme_wrappers.fn_GetThemeStream != NULL)
+        return te_uxtheme_wrappers.fn_GetThemeBitmap(hTheme, iPartId, iStateId, iPropId, dwFlags, phBitmap);
+
+    *phBitmap = NULL;
+    return E_NOTIMPL;
+}
+
+HRESULT
 te_GetThemeStream(HTHEME hTheme, int iPartId, int iStateId, int iPropId, void** ppvStream, DWORD *pcbStream, HINSTANCE hInst)
 {
     if(te_uxtheme_wrappers.fn_GetThemeStream != NULL)
         return te_uxtheme_wrappers.fn_GetThemeStream(hTheme, iPartId, iStateId, iPropId, ppvStream, pcbStream, hInst);
-    else
-        return E_NOTIMPL;
+
+    *ppvStream = NULL;
+    *pcbStream = 0;
+    return E_NOTIMPL;
 }

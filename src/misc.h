@@ -69,8 +69,10 @@ INT_PTR te_dlgbox(const TCHAR* dlg_name, HWND parent, DLGPROC proc);
 
 /* Some UXTHEME.DLL functions are only available since more recent Windows
  * versions. So we wrapper them to keep compatibility with Windows XP. */
+HRESULT te_GetThemeBitmap(HTHEME hTheme, int iPartId, int iStateId, int iPropId, ULONG dwFlags, HBITMAP *phBitmap);
 HRESULT te_GetThemeStream(HTHEME hTheme, int iPartId, int iStateId, int iPropId, void** ppvStream, DWORD *pcbStream, HINSTANCE hInst);
 
+#define GetThemeBitmap      te_GetThemeBitmap
 #define GetThemeStream      te_GetThemeStream
 
 

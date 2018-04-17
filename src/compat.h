@@ -27,10 +27,27 @@
 
 #include <windows.h>
 #include <commctrl.h>
+#include <uxtheme.h>
 
 
 #ifndef BS_SPLITBUTTON
     #define BS_SPLITBUTTON      0x0000000CL
+#endif
+
+#ifndef TMT_DIBDATA
+    #define TMT_DIBDATA         2
+#endif
+
+#ifndef TMT_GLYPHDIBDATA
+    #define TMT_GLYPHDIBDATA    8
+#endif
+
+#ifndef GBF_DIRECT
+    #define GBF_DIRECT          0x00000001
+#endif
+
+#ifndef GBF_COPY
+    #define GBF_COPY            0x00000002
 #endif
 
 

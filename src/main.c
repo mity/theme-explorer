@@ -138,12 +138,6 @@ main_wm_initdialog(HWND win)
     }
 }
 
-#define TMT_DIBDATA	2
-#define TMT_GLYPHDIBDATA	8
-#define GBF_DIRECT      0x00000001
-#define GBF_COPY        0x00000002
-static HRESULT (WINAPI* fn_GetThemeBitmap)(HTHEME, int, int, int, ULONG, HBITMAP*);
-
 static void
 main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_state_t* state)
 {
@@ -178,8 +172,8 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
             themeview_setup(GetDlgItem(win, i), cls->name, cls->subclass, part->id, state->id);
 
         bmp = NULL;
-        if(theme  &&  fn_GetThemeBitmap)
-            fn_GetThemeBitmap(theme, part->id, state->id, TMT_DIBDATA, GBF_DIRECT, &bmp);
+        if(theme)
+            GetThemeBitmap(theme, part->id, state->id, TMT_DIBDATA, GBF_DIRECT, &bmp);
         SendDlgItemMessage(win, IDC_MAIN_BITMAP_BKG, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)bmp);
 
         /* Stupid workaround. Seems there is a bug either in Windows headers
@@ -187,11 +181,11 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
          * as 8, but on Windows 7 it always fails. Instead it works for 3.
          * One of those seems to be buggy.
          */
-        if(theme  &&  fn_GetThemeBitmap) {
+        if(theme) {
             HRESULT hr;
-            hr = fn_GetThemeBitmap(theme, part->id, state->id, 3, GBF_DIRECT, &bmp);
+            hr = GetThemeBitmap(theme, part->id, state->id, 3, GBF_DIRECT, &bmp);
             if(FAILED(hr))
-                fn_GetThemeBitmap(theme, part->id, state->id, TMT_GLYPHDIBDATA, GBF_DIRECT, &bmp);
+                GetThemeBitmap(theme, part->id, state->id, TMT_GLYPHDIBDATA, GBF_DIRECT, &bmp);
         }
         SendDlgItemMessage(win, IDC_MAIN_BITMAP_GLYPH, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)bmp);
     }
@@ -215,22 +209,12 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
                 enum PROPERTYORIGIN origin;
                 TCHAR buffer[256];
 
-                if(prop->id == TS_MIN  ||   prop->id == TS_TRUE  ||  prop->id == TS_DRAW) {
-                    if(part->id != 0)
-                        origin = PO_PART;
-                    else
-                        origin = PO_NOTFOUND;
-                } else {
-                    if(GetThemePropertyOrigin(theme, part->id, state->id, prop->id, &origin) != S_OK)
-                        continue;
-                }
-
-                if(origin == PO_NOTFOUND)
-                    continue;
-
                 prop->type->to_string(theme, part->id, state->id, prop->id,
                                       buffer, TE_ARRAY_SIZE(buffer));
-                if(buffer[0] == '\0')
+                if(GetThemePropertyOrigin(theme, part->id, state->id, prop->id, &origin) != S_OK)
+                    origin = PO_NOTFOUND;
+
+                if(origin == PO_NOTFOUND  &&  buffer[0] == _T('\0'))
                     continue;
 
                 item.iSubItem = 0;
@@ -254,11 +238,12 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
 
                 item.iSubItem = 4;
                 switch((int)origin) {
-                    case PO_STATE:   item.pszText = _T("state"); break;
-                    case PO_PART:    item.pszText = _T("part"); break;
-                    case PO_CLASS:   item.pszText = _T("class"); break;
-                    case PO_GLOBAL:  item.pszText = _T("global"); break;
-                    default:         item.pszText = _T("?"); break;
+                    case PO_STATE:      item.pszText = _T("state"); break;
+                    case PO_PART:       item.pszText = _T("part"); break;
+                    case PO_CLASS:      item.pszText = _T("class"); break;
+                    case PO_GLOBAL:     item.pszText = _T("global"); break;
+                    case PO_NOTFOUND:   item.pszText = _T("[unknown]"); break;
+                    default:            _sntprintf(buffer, TE_ARRAY_SIZE(buffer), _T("Origin #%d"), (int)origin); break;
                 }
                 SendMessage(lv, LVM_SETITEM, 0, (LPARAM) &item);
 
@@ -401,15 +386,6 @@ main_proc(HWND win, UINT msg, WPARAM wp, LPARAM lp)
 int APIENTRY
 _tWinMain(HINSTANCE instance, HINSTANCE instance_prev, LPTSTR cmd_line, int cmd_show)
 {
-    HMODULE dll;
-
-    dll = GetModuleHandle(_T("uxtheme.dll"));
-    if(dll)
-        fn_GetThemeBitmap = (HRESULT(WINAPI *)(HTHEME, int, int, int, ULONG, HBITMAP*))
-                                    GetProcAddress(dll, "GetThemeBitmap");
-    else
-        fn_GetThemeBitmap = NULL;
-
     te_init(instance);
 
     //DialogBox(te_instance, MAKEINTRESOURCE(IDD_MAIN), NULL, main_proc);
