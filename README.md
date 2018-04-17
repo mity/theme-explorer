@@ -1,3 +1,4 @@
+[![Build status (appveyor.com)](https://img.shields.io/appveyor/ci/mity/theme-explorer/master.svg?label=build)](https://ci.appveyor.com/project/mity/theme-explorer/branch/master)
 
 # Theme Explorer
 
