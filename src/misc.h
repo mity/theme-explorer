@@ -19,6 +19,7 @@
 #ifndef TE_MISC_H
 #define TE_MISC_H
 
+#include <malloc.h>
 #include <tchar.h>
 #include <windows.h>
 #include <commctrl.h>

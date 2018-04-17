@@ -206,7 +206,7 @@ main_reset(HWND win, const db_class_t* cls, const db_part_t* part, const db_stat
             SendMessage(lv, LVM_SETITEMCOUNT, db_n_props, 0);
             for(i = 0; i < db_n_props; i++) {
                 const db_prop_t* prop = &db_props[i];
-                PROPERTYORIGIN origin;
+                enum PROPERTYORIGIN origin;
                 TCHAR buffer[256];
 
                 if(prop->id == TS_MIN  ||   prop->id == TS_TRUE  ||  prop->id == TS_DRAW) {
@@ -393,7 +393,7 @@ main_proc(HWND win, UINT msg, WPARAM wp, LPARAM lp)
 
 
 int APIENTRY
-WinMain(HINSTANCE instance, HINSTANCE instance_prev, LPSTR cmd_line, int cmd_show)
+_tWinMain(HINSTANCE instance, HINSTANCE instance_prev, LPTSTR cmd_line, int cmd_show)
 {
     HMODULE dll;
 
