@@ -16,7 +16,7 @@ elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
 endif()
 
 
-add_executable("ThemeExplorer"
+add_executable("ThemeExplorer" WIN32
         compat.h
         db.c
         db.h
