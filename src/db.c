@@ -2152,9 +2152,9 @@ db_to_string_TMT_ENUM(HTHEME theme, int part, int state, int prop, TCHAR* buffer
 
         case 4007:
             switch(val) {
-                case 0:  str = _T("VA_LEFT"); break;
+                case 0:  str = _T("VA_TOP"); break;
                 case 1:  str = _T("VA_CENTER"); break;
-                case 2:  str = _T("VA_RIGHT"); break;
+                case 2:  str = _T("VA_BOTTOM"); break;
             }
             break;
 
