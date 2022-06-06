@@ -151,6 +151,11 @@ static const db_state_t db_states_BP_COMMANDLINKGLYPH[] = {
     DB_DEFINE_STATE ( 5,  CMDLGS_DEFAULTED,  Defaulted)
 };
 
+static const db_state_t db_states_BP_PUSHBUTTONDROPDOWN[] = {
+    DB_DEFINE_STATE ( 1,  PBDDS_NORMAL,      Normal),
+    DB_DEFINE_STATE ( 2,  PBDDS_DISABLED,    Disabled)
+};
+
 static const db_part_t db_parts_BUTTON[] = {
     DB_DEFINE_PART  ( 1,  BP_PUSHBUTTON,        PushButton,        db_states_BP_PUSHBUTTON),
     DB_DEFINE_PART  ( 2,  BP_RADIOBUTTON,       RadioButton,       db_states_BP_RADIOBUTTON),
@@ -158,7 +163,11 @@ static const db_part_t db_parts_BUTTON[] = {
     DB_DEFINE_PART  ( 4,  BP_GROUPBOX,          GroupBox,          db_states_BP_GROUPBOX),
     DB_DEFINE_PART_ ( 5,  BP_USERBUTTON,        UserButton),
     DB_DEFINE_PART  ( 6,  BP_COMMANDLINK,       CommandLink,       db_states_BP_COMMANDLINK),
-    DB_DEFINE_PART  ( 7,  BP_COMMANDLINKGLYPH,  CommandLinkGlyph,  db_states_BP_COMMANDLINKGLYPH)
+    DB_DEFINE_PART  ( 7,  BP_COMMANDLINKGLYPH,  CommandLinkGlyph,  db_states_BP_COMMANDLINKGLYPH),
+    DB_DEFINE_PART  ( 8,  BP_RADIOBUTTON_HCDISABLED, RadioButtonLite, db_states_BP_RADIOBUTTON),
+    DB_DEFINE_PART  ( 9,  BP_CHECKBOX_HCDISABLED, CheckBoxLite,    db_states_BP_CHECKBOX),
+    DB_DEFINE_PART  (10,  BP_GROUPBOX_HCDISABLED, GroupBoxLite,    db_states_BP_GROUPBOX),
+    DB_DEFINE_PART  (11,  BP_PUSHBUTTONDROPDOWN, PushButtonDropDown, db_states_BP_PUSHBUTTONDROPDOWN)
 };
 
 
@@ -186,6 +195,13 @@ static const db_state_t db_states_CP_DROPDOWNBUTTON[] = {
     DB_DEFINE_STATE ( 2,  CBXS_HOT,       Hot),
     DB_DEFINE_STATE ( 3,  CBXS_PRESSED,   Pressed),
     DB_DEFINE_STATE ( 4,  CBXS_DISABLED,  Disabled)
+};
+
+static const db_state_t db_states_CP_TRANSPARENTBACKGROUND[] = {
+    DB_DEFINE_STATE ( 1,  CBTBS_NORMAL,   Normal),
+    DB_DEFINE_STATE ( 2,  CBTBS_HOT,      Hot),
+    DB_DEFINE_STATE ( 3,  CBTBS_DISABLED, Disabled),
+    DB_DEFINE_STATE ( 4,  CBTBS_FOCUSED,  Focused)
 };
 
 static const db_state_t db_states_CP_BORDER[] = {
@@ -223,15 +239,21 @@ static const db_state_t db_states_CP_CUEBANNER[] = {
     DB_DEFINE_STATE ( 4,  CBCB_DISABLED,  Disabled)
 };
 
+static const db_state_t db_states_CP_DROPDOWNITEM[] = {
+    DB_DEFINE_STATE ( 1,  CBDI_NORMAL,    Normal),
+    DB_DEFINE_STATE ( 2,  CBDI_HIGHLIGHTED, HighLighted)
+};
+
 static const db_part_t db_parts_COMBOBOX[] = {
     DB_DEFINE_PART  ( 1,  CP_DROPDOWNBUTTON,         DropDownButton,         db_states_CP_DROPDOWNBUTTON),
     DB_DEFINE_PART_ ( 2,  CP_BACKGROUND,             Background),
-    DB_DEFINE_PART_ ( 3,  CP_TRANSPARENTBACKGROUND,  TransparentBackground),
+    DB_DEFINE_PART  ( 3,  CP_TRANSPARENTBACKGROUND,  TransparentBackground,  db_states_CP_TRANSPARENTBACKGROUND),
     DB_DEFINE_PART  ( 4,  CP_BORDER,                 Border,                 db_states_CP_BORDER),
     DB_DEFINE_PART  ( 5,  CP_READONLY,               ReadOnly,               db_states_CP_READONLY),
     DB_DEFINE_PART  ( 6,  CP_DROPDOWNBUTTONRIGHT,    DropDownButtonRight,    db_states_CP_DROPDOWNBUTTONRIGHT),
     DB_DEFINE_PART  ( 7,  CP_DROPDOWNBUTTONLEFT,     DropDownButtonLeft,     db_states_CP_DROPDOWNBUTTONLEFT),
-    DB_DEFINE_PART  ( 8,  CP_CUEBANNER,              CueBanner,              db_states_CP_CUEBANNER)
+    DB_DEFINE_PART  ( 8,  CP_CUEBANNER,              CueBanner,              db_states_CP_CUEBANNER),
+    DB_DEFINE_PART  ( 9,  CP_DROPDOWNITEM,           DropDownItem,           db_states_CP_DROPDOWNITEM)
 };
 
 
@@ -388,11 +410,11 @@ static const db_state_t db_states_EP_EDITTEXT[] = {
     DB_DEFINE_STATE ( 1,  ETS_NORMAL,     Normal),
     DB_DEFINE_STATE ( 2,  ETS_HOT,        Hot),
     DB_DEFINE_STATE ( 3,  ETS_SELECTED,   Selected),
-    DB_DEFINE_STATE ( 3,  ETS_DISABLED,   Disabled),
-    DB_DEFINE_STATE ( 4,  ETS_FOCUSED,    Focused),
-    DB_DEFINE_STATE ( 5,  ETS_READONLY,   ReadOnly),
-    DB_DEFINE_STATE ( 6,  ETS_ASSIST,     Assist),
-    DB_DEFINE_STATE ( 7,  ETS_CUEBANNER,  CueBanner)
+    DB_DEFINE_STATE ( 4,  ETS_DISABLED,   Disabled),
+    DB_DEFINE_STATE ( 5,  ETS_FOCUSED,    Focused),
+    DB_DEFINE_STATE ( 6,  ETS_READONLY,   ReadOnly),
+    DB_DEFINE_STATE ( 7,  ETS_ASSIST,     Assist),
+    DB_DEFINE_STATE ( 8,  ETS_CUEBANNER,  CueBanner)
 };
 
 static const db_state_t db_states_EP_BACKGROUND[] = {
@@ -1188,7 +1210,8 @@ static const db_part_t db_parts_SCROLLBAR[] = {
     DB_DEFINE_PART  ( 7,  SBP_UPPERTRACKVERT,  UpperTrackVert,  db_states_SBP_shared),
     DB_DEFINE_PART  ( 8,  SBP_GRIPPERHORZ,     GripperHorz,     db_states_SBP_shared),
     DB_DEFINE_PART  ( 9,  SBP_GRIPPERVERT,     GripperVert,     db_states_SBP_shared),
-    DB_DEFINE_PART  (10,  SBP_SIZEBOX,         SizeBox,         db_states_SBP_SIZEBOX)
+    DB_DEFINE_PART  (10,  SBP_SIZEBOX,         SizeBox,         db_states_SBP_SIZEBOX),
+    DB_DEFINE_PART_ (11,  SBP_SIZEBOXBKGND,    SizeBoxBkgnd)
 };
 
 
@@ -1474,7 +1497,9 @@ static const db_state_t db_states_TDLG_EXPANDOBUTTON[] = {
     DB_DEFINE_STATE ( 3,  TDLGEBS_PRESSED,          Pressed),
     DB_DEFINE_STATE ( 4,  TDLGEBS_EXPANDEDNORMAL,   ExpandedNormal),
     DB_DEFINE_STATE ( 5,  TDLGEBS_EXPANDEDHOVER,    ExpandedHover),
-    DB_DEFINE_STATE ( 6,  TDLGEBS_EXPANDEDPRESSED,  ExpandedPressed)
+    DB_DEFINE_STATE ( 6,  TDLGEBS_EXPANDEDPRESSED,  ExpandedPressed),
+    DB_DEFINE_STATE ( 7,  TDLGEBS_NORMALDISABLED,   NormalDisabled),
+    DB_DEFINE_STATE ( 8,  TDLGEBS_EXPANDEDDISABLED, ExpandedDisabled)
 };
 
 static const db_part_t db_parts_TASKDIALOG[] = {
@@ -1830,12 +1855,12 @@ static const db_part_t db_parts_WINDOW[] = {
     DB_DEFINE_PART  ( 4,  WP_SMALLMINCAPTION,                 SmallMinCaption,                db_states_WP_MINCAPTION),
     DB_DEFINE_PART  ( 5,  WP_MAXCAPTION,                      MaxCaption,                     db_states_WP_MAXCAPTION),
     DB_DEFINE_PART  ( 6,  WP_SMALLMAXCAPTION,                 SmallMaxCaption,                db_states_WP_MAXCAPTION),
-    DB_DEFINE_PART_ ( 7,  WP_FRAMELEFT,                       FrameLeft),
-    DB_DEFINE_PART_ ( 8,  WP_FRAMERIGHT,                      FrameRight),
-    DB_DEFINE_PART_ ( 9,  WP_FRAMEBOTTOM,                     FrameBottom),
-    DB_DEFINE_PART_ (10,  WP_SMALLFRAMELEFT,                  SmallFrameLeft),
-    DB_DEFINE_PART_ (11,  WP_SMALLFRAMERIGHT,                 SmallFrameRight),
-    DB_DEFINE_PART_ (12,  WP_SMALLFRAMEBOTTOM,                SmallFrameBottom),
+    DB_DEFINE_PART  ( 7,  WP_FRAMELEFT,                       FrameLeft,                      db_states_WP_FRAME),
+    DB_DEFINE_PART  ( 8,  WP_FRAMERIGHT,                      FrameRight,                     db_states_WP_FRAME),
+    DB_DEFINE_PART  ( 9,  WP_FRAMEBOTTOM,                     FrameBottom,                    db_states_WP_FRAME),
+    DB_DEFINE_PART  (10,  WP_SMALLFRAMELEFT,                  SmallFrameLeft,                 db_states_WP_FRAME),
+    DB_DEFINE_PART  (11,  WP_SMALLFRAMERIGHT,                 SmallFrameRight,                db_states_WP_FRAME),
+    DB_DEFINE_PART  (12,  WP_SMALLFRAMEBOTTOM,                SmallFrameBottom,               db_states_WP_FRAME),
     DB_DEFINE_PART  (13,  WP_SYSBUTTON,                       SysButton,                      db_states_WP_SYSBUTTON),
     DB_DEFINE_PART  (14,  WP_MDISYSBUTTON,                    MdiSysButton,                   db_states_WP_SYSBUTTON),
     DB_DEFINE_PART  (15,  WP_MINBUTTON,                       MinButton,                      db_states_WP_MINBUTTON),
@@ -1861,7 +1886,8 @@ static const db_part_t db_parts_WINDOW[] = {
     DB_DEFINE_PART_ (35,  WP_SMALLFRAMERIGHTSIZINGTEMPLATE,   SmallFrameRightSizingTemplate),
     DB_DEFINE_PART_ (36,  WP_FRAMEBOTTOMSIZINGTEMPLATE,       FrameBottomSizingTemplate),
     DB_DEFINE_PART_ (37,  WP_SMALLFRAMEBOTTOMSIZINGTEMPLATE,  SmallFrameRightSizingTemplate),
-    DB_DEFINE_PART  (38,  WP_FRAME,                           Frame,                          db_states_WP_FRAME)
+    DB_DEFINE_PART  (38,  WP_FRAME,                           Frame,                          db_states_WP_FRAME),
+    DB_DEFINE_PART_ (39,  WP_BORDER,                          Border),
 };
 
 
