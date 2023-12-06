@@ -2252,9 +2252,14 @@ static void
 db_to_string_TMT_INT(HTHEME theme, int part, int state, int prop, TCHAR* buffer, DWORD bufsize)
 {
     int val;
+    HDC dc;
+    HRESULT hr;
 
     if(GetThemeInt(theme, part, state, prop, &val) != S_OK) {
-        if(GetThemeMetric(theme, GetDC(NULL), part, state, prop, &val) != S_OK) {
+        dc = GetDC(NULL);
+        hr = GetThemeMetric(theme, dc, part, state, prop, &val);
+        ReleaseDC(NULL, dc);
+        if(hr != S_OK) {
             buffer[0] = _T('\0');
             return;
         }
@@ -2295,8 +2300,13 @@ static void
 db_to_string_TMT_MARGINS(HTHEME theme, int part, int state, int prop, TCHAR* buffer, DWORD bufsize)
 {
     MARGINS margins;
+    HDC dc;
+    HRESULT hr;
 
-    if(GetThemeMargins(theme, GetDC(NULL), part, state, prop, NULL, &margins) != S_OK) {
+    dc = GetDC(NULL);
+    hr = GetThemeMargins(theme, dc, part, state, prop, NULL, &margins);
+    ReleaseDC(NULL, dc);
+    if(hr != S_OK) {
         buffer[0] = _T('\0');
         return;
     }
@@ -2317,8 +2327,13 @@ static void
 db_to_string_TMT_SIZE(HTHEME theme, int part, int state, int prop, TCHAR* buffer, DWORD bufsize)
 {
     SIZE size;
+    HDC dc;
+    HRESULT hr;
 
-    if(GetThemePartSize(theme, GetDC(NULL), part, state, NULL, prop, &size) != S_OK) {
+    dc = GetDC(NULL);
+    hr = GetThemePartSize(theme, dc, part, state, NULL, prop, &size);
+    ReleaseDC(NULL, dc);
+    if(hr != S_OK) {
         buffer[0] = _T('\0');
         return;
     }
@@ -2359,8 +2374,13 @@ db_to_string_TMT_FONT(HTHEME theme, int part, int state, int prop, TCHAR* buffer
 {
     const TCHAR* weight = _T("");
     LOGFONT lf;
+    HDC dc;
+    HRESULT hr;
 
-    if(GetThemeFont(theme, GetDC(NULL), part, state, prop, &lf) != S_OK) {
+    dc = GetDC(NULL);
+    hr = GetThemeFont(theme, dc, part, state, prop, &lf);
+    ReleaseDC(NULL, dc);
+    if(hr != S_OK) {
         buffer[0] = _T('\0');
         return;
     }
